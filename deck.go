@@ -3,8 +3,10 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"math/rand"
 	"os"
 	"strings"
+	"time"
 )
 
 // Create type of deck
@@ -21,7 +23,7 @@ func newDeck() deck {
 	// with an underscore (i,j)
 	for _, suit := range cardSuits {
 		for _, value := range cardValues {
-			cards = append(cards, suit+" of "+value)
+			cards = append(cards, value+" of "+suit)
 		}
 	}
 	return cards
@@ -63,4 +65,19 @@ func newDeckFromFile(filename string) deck {
 	}
 	s := strings.Split(string(bs), ",")
 	return deck(s)
+}
+
+func (d deck) shuffle() {
+	// random source to get truly random generator 
+	source := rand.NewSource(time.Now().UnixNano())
+	r := rand.New(source)
+
+	// iterated through elements inside of slice
+	for i := range d {
+		// generate random number
+		newPosition := r.Intn(len(d) - 1)
+		// take new position and assign to i
+		// takes what is at i and assign to new position
+		d[i], d[newPosition] = d[newPosition], d[i]
+	}
 }
