@@ -17,8 +17,7 @@ func newDeck() deck {
 	cards := deck{}
 
 	cardSuits := []string{"Spades", "Diamonds", "Hearts", "Clubs"}
-	cardValues := []string{"Aces", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven"}
-
+	cardValues := []string{"Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven"}
 	// anytime you have a variable you're not using you replace
 	// with an underscore (i,j)
 	for _, suit := range cardSuits {
@@ -68,7 +67,7 @@ func newDeckFromFile(filename string) deck {
 }
 
 func (d deck) shuffle() {
-	// random source to get truly random generator 
+	// random source to get truly random generator
 	source := rand.NewSource(time.Now().UnixNano())
 	r := rand.New(source)
 
